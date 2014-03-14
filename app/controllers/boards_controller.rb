@@ -3,10 +3,8 @@ class BoardsController < ApplicationController
 
   def index
     @boards = Board.includes(:lists, :cards).for_member(current_user)
-
     @lists = []
     @boards.each { |board| @lists << board.lists }
-
     @cards = []
     @boards.each { |board| @cards << board.cards }
     @myID = current_user.id
@@ -19,13 +17,11 @@ class BoardsController < ApplicationController
 
   def show
     @board = Board.find(params[:id])
-
     render json: @board
   end
 
   def create
     @board = current_user.boards.build(board_params)
-
     if @board.save
       render json: @board
     else
