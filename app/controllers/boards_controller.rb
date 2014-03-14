@@ -8,7 +8,6 @@ class BoardsController < ApplicationController
     @cards = []
     @boards.each { |board| @cards << board.cards }
     @myID = current_user.id
-
     respond_to do |format|
       format.html { render :index }
       format.json { render :json => @boards}
