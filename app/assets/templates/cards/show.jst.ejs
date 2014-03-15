@@ -15,18 +15,14 @@
           <% todoItems.each(function (item) { %>
             <li class="item_entry">
               <label for="item_<%= item.id %>" class="todo_label">
-              
                 <%= item.escape('title') %>
-              
                 <input
                   id="item_<%= item.id %>"
                   type="checkbox"
                   data-id="<%= item.id %>"
                   <% if (item.get('done')) { %>
                     checked
-                  <% } %>
-                >
-              
+                  <% } %>>
               </label>
               <span class="deleteTodo icon-trash hidden" data-id="<%= item.id %>" ></span>
             </li>
