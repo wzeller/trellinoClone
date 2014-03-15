@@ -1,13 +1,27 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Models.List = Backbone.Model.extend({
-  initialize: function () {
-    this.cards = new Trellino.Collections.Cards();
+  parse: function (resp) {
+    if(resp.cards) {
+      this.cards().set(resp.cards);
+      delete resp.cards;
+    }
+    return resp.cards;
+  },
+
+  cards: function () {
+    if(!this._cards) {
+      this._cards = new Trellino.Collections.Cards([], { list: this });
+    }
+    return this._cards;
   },
 
   normalizeRanks: function (deletedCard, collection) {
-    console.log("HEY THERE BROTHER")
+    console.log("HEY THERE BROTHER");
     var deletedCardRank = deletedCard.get('rank');
     if (deletedCardRank === collection.models.length + 1) {
-      return
+      return;
     } else {
       collection.each(function (card) {
         var cardRank = card.get('rank');

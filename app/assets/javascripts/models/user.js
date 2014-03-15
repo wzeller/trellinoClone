@@ -1,10 +1,4 @@
-Trellino.Models.User = Backbone.RelationalModel.extend({
-  // relations: [{
-  //   type: Backbone.HasMany,
-  //   key: 'cards',
-  //   relatedModel: 'Trellino.Models.Card',
-  //   reverseRelation: {
-  //     key: 'user'
-  //   }
-  // }]
-});
+/*global Trellino, Backbone, _ */
+"use strict";
+
+Trellino.Models.User = Backbone.RelationalModel.extend({});

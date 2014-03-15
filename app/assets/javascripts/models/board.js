@@ -1,15 +1,19 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Models.Board = Backbone.Model.extend({
-  initialize: function () {
-    this.lists = new Trellino.Collections.Lists()
+  parse: function (resp) {
+    if(resp.lists) {
+      this.lists().set(resp.lists);
+      delete resp.lists;
+    }
+    return resp;
   },
-  
-  parse: function (response) {
-    var members = new Trellino.Collections.Users();
-    _(response.members).each(function (member) {
-      members.add(member);
-    })
-    response.members = members;
-    
-    return response;
-  }
+
+  lists: function () {
+    if(!this._lists) {
+      this._lists = new Trellino.Collections.Lists([], { board: this });
+    }
+    return this._lists;
+  },
 });
