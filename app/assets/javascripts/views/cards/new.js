@@ -1,3 +1,6 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Views.CardNew = Backbone.View.extend({
 
 	// Model is the list receiving a new card. Collection is the list's cards.

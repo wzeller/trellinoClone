@@ -1,14 +1,16 @@
-// Model is the card receiving a new todo item
+/*global Trellino, Backbone, _ */
+"use strict";
 
+// Model is the card receiving a new todo item
 Trellino.Views.TodoItemNew = Backbone.View.extend({
-  
+
 	events: {
     "click input[type='submit']": "create",
 		"click button.cancel": "cancel"
 	},
-  
+
   template: JST['todo_items/new'],
-  
+
   render: function () {
     var renderedContent = this.template({
       card: this.model
@@ -16,7 +18,7 @@ Trellino.Views.TodoItemNew = Backbone.View.extend({
     this.$el.html(renderedContent);
     return this;
   },
-  
+
   create: function (event) {
 		var that = this;
 		event.preventDefault();
@@ -28,10 +30,10 @@ Trellino.Views.TodoItemNew = Backbone.View.extend({
       }
     });
   },
-  
+
   cancel: function (event) {
     event.preventDefault();
     this.model.trigger('sync');
   }
-  
+
 });

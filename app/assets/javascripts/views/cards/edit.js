@@ -1,5 +1,8 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Views.CardEdit = Backbone.View.extend({
-  
+
   // Model is the card being edited.
 
   events: {
@@ -8,7 +11,7 @@ Trellino.Views.CardEdit = Backbone.View.extend({
   },
 
   template: JST['cards/edit'],
-	
+
   render: function () {
     var renderedContent = this.template({
       card: this.model,
@@ -18,7 +21,7 @@ Trellino.Views.CardEdit = Backbone.View.extend({
     this.$el.html(renderedContent);
     return this;
   },
-	
+
   update: function (event) {
     var that = this;
     var cardProp = this.cardProp;

@@ -1,15 +1,17 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Views.MemberNew = Backbone.View.extend({
-	
 	// Model is the board receiving a new member.
   // Collection is the user's boards.
-	
+
 	events: {
 		"click input[type='submit']": "add",
 		"click button.cancel": "cancel"
 	},
-	
+
 	template: JST['members/new'],
-		
+
   render: function () {
     var renderedContent = this.template();
 
@@ -17,7 +19,7 @@ Trellino.Views.MemberNew = Backbone.View.extend({
 
     return this;
   },
-	
+
 	add: function (event) {
 		var that = this;
 		event.preventDefault();
@@ -25,7 +27,7 @@ Trellino.Views.MemberNew = Backbone.View.extend({
     this.model.save({ 'newMemberEmail': newMemberEmail });
 		this.collection.trigger('add');
 	},
-	
+
 	cancel: function (event) {
 		event.preventDefault();
 		this.collection.trigger('add');

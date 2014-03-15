@@ -1,5 +1,7 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Views.ListNew = Backbone.View.extend({
-  
   // Model is the board receiving a new list. Collection is the board's lists.
 
   events: {
@@ -8,7 +10,7 @@ Trellino.Views.ListNew = Backbone.View.extend({
   },
 
   template: JST['lists/new'],
-	
+
   render: function () {
     var newListRank = this.collection.models.length + 1;
     var renderedContent = this.template({
@@ -21,7 +23,7 @@ Trellino.Views.ListNew = Backbone.View.extend({
 
     return this;
   },
-	
+
   create: function (event) {
     var that = this;
     event.preventDefault();

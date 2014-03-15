@@ -1,10 +1,13 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Views.BoardNew = Backbone.View.extend({
 	events: {
 		"click input[type='submit']": "create"
 	},
-	
+
 	template: JST['boards/new'],
-		
+
   render: function () {
     var renderedContent = this.template({
 			board: this.model,
@@ -14,7 +17,7 @@ Trellino.Views.BoardNew = Backbone.View.extend({
 
     return this;
   },
-	
+
 	create: function (event) {
 		var that = this;
 		event.preventDefault();
@@ -30,5 +33,5 @@ Trellino.Views.BoardNew = Backbone.View.extend({
       }
 		});
 	},
-	
+
 });

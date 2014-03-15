@@ -1,21 +1,24 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Views.CardsIndex = Backbone.View.extend({
-	
+
 	// Collection is the cards. Model is the list they belong to.
-		
+
 	initialize: function() {
 		this.listenTo(this.collection, 'add', this.render),
 		this.listenTo(this.collection, 'remove', this.render)
 	},
-	
+
 	events: {
     "mouseover li.card_entry": "addDeleteButton",
     "mouseleave li.card_entry": "removeDeleteButton",
 		"click span.deleteCard": "deleteCard",
 		"click button.addCard": "addCard"
 	},
-	
+
 	template: JST['cards/index'],
-		
+
   render: function () {
     var that = this;
     var renderedContent = this.template({
@@ -23,14 +26,14 @@ Trellino.Views.CardsIndex = Backbone.View.extend({
       list: this.model
     });
     this.$el.html(renderedContent);
-    
+
     var $placeholder = this.$el.find('li.placeholder');
     if (this.collection.length == 0) {
       $placeholder.removeClass('hidden');
     } else {
       $placeholder.addClass('hidden');
     }
-    
+
     this.$("ul.card_list").sortable({
       items: "> .card_entry",
       placeholder: "card_placeholder",
@@ -39,12 +42,12 @@ Trellino.Views.CardsIndex = Backbone.View.extend({
       start: function (event, ui) {
         var listItems = $(event.target).find('li');
         var length = listItems.length;
-        
+
         if (length === 3) {
           var $placeholder = that.$el.find('li.placeholder');
           $placeholder.removeClass('hidden');
         }
-        
+
         $(ui.item).toggleClass('dragged');
         var cardHeight = $(ui.item).height();
         var cardWidth = $(ui.item).width();
@@ -73,7 +76,7 @@ Trellino.Views.CardsIndex = Backbone.View.extend({
     });
     return this;
   },
-  
+
   addDeleteButton: function (event) {
     $(event.target).find('span.deleteCard').removeClass('hidden');
   },
@@ -91,7 +94,7 @@ Trellino.Views.CardsIndex = Backbone.View.extend({
 		});
 		this.$('ul.card_list').append(newCardView.render().$el);
 	},
-  
+
 	deleteCard: function (event) {
 		var cardID = $(event.target).attr('data-id');
 		var cardToDelete = this.collection.get(cardID);
@@ -104,10 +107,10 @@ Trellino.Views.CardsIndex = Backbone.View.extend({
     }
     this._realignList($(event.target));
 	},
-  
+
   _realignList: function ($ul) {
     var listItems = $ul.find('li');
-    
+
     $(listItems).each(function (index, item) {
       if ($(item).hasClass("placeholder")) {
         null

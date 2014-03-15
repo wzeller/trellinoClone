@@ -1,13 +1,15 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 // Model is the board being shown.
 // Collection is the board's lists.
 
-
 Trellino.Views.BoardShow = Backbone.View.extend({
-  
+
   initialize: function () {
     this.listenTo(this.collection, 'add', this.render);
   },
-  
+
 	events: {
 		"click button.newList": "addList",
     "click span.list_entry": "renameList",
@@ -15,9 +17,9 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     "click li.card_entry": "showCard",
 		"click button.deleteBoard": "deleteBoard"
 	},
-	
+
 	template: JST['boards/show'],
-		
+
   render: function () {
 		var that = this;
     var boardMembers = this.model.get('members');
@@ -26,9 +28,9 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       lists: this.collection,
       members: boardMembers
     });
-        
+
     this.$el.html(renderedContent);
-        
+
     this.$('ul.list_list').sortable({
       tolerance: 'pointer',
       start: function (event, ui) {
@@ -39,7 +41,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
         that._realignBoard($(event.target));
       }
     });
-		
+
 		this.collection.each(function (list) {
 			var cardsIndexView = new Trellino.Views.CardsIndex({
 				model: list,
@@ -48,13 +50,13 @@ Trellino.Views.BoardShow = Backbone.View.extend({
 			var $cardsViewEl = cardsIndexView.render().$el;
 			that.$el.find('li#list_' + list.id).append($cardsViewEl);
 		});
-    
+
     var flexwidth = (this.collection.length > 1 ? 270 * this.collection.length : 280);
     this.$el.find('#list_index').outerWidth(flexwidth);
-    
+
     return this;
   },
-	
+
 	addList: function (event) {
 		var that = this;
     $(event.target).toggleClass('hidden');
@@ -64,7 +66,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
 		});
 		this.$el.find('#listAdder').append(newListView.render().$el);
 	},
-  
+
   renameList: function (event) {
     var selectedList = this.collection.get(($(event.target).attr('data-id')))
 
@@ -76,7 +78,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       $(event.target).html(editListView.render().$el);
     }
   },
-  
+
   addMember: function (event) {
     $(event.target).toggleClass('hidden');
 		var newMemberView = new Trellino.Views.MemberNew({
@@ -85,7 +87,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
 		});
 		$(event.target).parent().append(newMemberView.render().$el);
   },
-  
+
   showCard: function (event) {
     var cardID = $(event.target).attr('data-id');
     var selectedCard = Trellino.cards.get(cardID);
@@ -93,11 +95,11 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       model: selectedCard,
       collection: selectedCard.get('todo_items')
     });
-    
+
     $('.overlay').toggleClass('hidden');
     $('.overlay').append(cardShowView.render().$el);
   },
-  
+
   deleteBoard: function (event) {
     var boardID = this.model.id;
     this.model.destroy({
@@ -112,11 +114,11 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       }
     });
   },
-  
+
   _realignBoard: function ($ul) {
     var listItems = $ul.find('li');
     var length = listItems.length;
-    
+
     var rankIndex = 1;
     $(listItems).each(function (index, item) {
       if ($(item).hasClass('list_entry')) {
@@ -127,5 +129,5 @@ Trellino.Views.BoardShow = Backbone.View.extend({
       }
     })
   }
-  	
+
 });

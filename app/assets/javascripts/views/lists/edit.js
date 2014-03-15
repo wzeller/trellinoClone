@@ -1,5 +1,8 @@
+/*global Trellino, Backbone, _ */
+"use strict";
+
 Trellino.Views.ListEdit = Backbone.View.extend({
-  
+
   // Model is the board receiving a new list. Collection is the board's lists.
 
   events: {
@@ -8,7 +11,7 @@ Trellino.Views.ListEdit = Backbone.View.extend({
   },
 
   template: JST['lists/edit'],
-	
+
   render: function () {
     var renderedContent = this.template({
       list: this.model,
@@ -17,7 +20,7 @@ Trellino.Views.ListEdit = Backbone.View.extend({
     this.$el.html(renderedContent);
     return this;
   },
-	
+
   update: function (event) {
     var that = this;
     event.preventDefault();
