@@ -4,11 +4,12 @@
 Trellino.Views.BoardShow = Backbone.View.extend({
   initialize: function () {
     this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model.lists(), 'add', this.render);
     this.listenTo(Trellino.boards, 'add', this.render);
   },
 
   events: {
-    'click button.newList': 'addList',
+    'click #new-list': 'addList',
     'click span.list_entry': 'renameList',
     'click button.newMember': 'addMember',
     'click li.card_entry': 'showCard',
@@ -55,13 +56,11 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   },
 
   addList: function (event) {
-    var that = this;
-    $(event.target).toggleClass('hidden');
-    var newListView = new Trellino.Views.ListNew({
-      model: this.model,
-      collection: this.collection
+    event.preventDefault();
+    var view = new Trellino.Views.ListNew({
+      board: this.model
     });
-    this.$el.find('#listAdder').append(newListView.render().$el);
+    $(event.currentTarget).replaceWith(view.render().$el);
   },
 
   renameList: function (event) {

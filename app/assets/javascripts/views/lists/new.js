@@ -1,46 +1,38 @@
-/*global Trellino, Backbone, _ */
+/*global Trellino, Backbone, $, _, JST */
 "use strict";
 
 Trellino.Views.ListNew = Backbone.View.extend({
-  // Model is the board receiving a new list. Collection is the board's lists.
+  initialize: function (options) {
+    this.board = options.board;
+  },
 
   events: {
-    "click input[type='submit']": "create",
+    "submit": "create",
     "click button.cancel": "cancel"
   },
 
   template: JST['lists/new'],
 
   render: function () {
-    var newListRank = this.collection.models.length + 1;
-    var renderedContent = this.template({
-      list: new Trellino.Models.List(),
-      rank: newListRank,
-      boardID: this.model.id
+    var content = this.template({
+      list: new Trellino.Models.List()
     });
-
-    this.$el.html(renderedContent);
-
+    this.$el.html(content);
     return this;
   },
 
   create: function (event) {
-    var that = this;
     event.preventDefault();
-    var newListAttrs = $('form').serializeJSON().list;
-    console.log(newListAttrs);
-    this.collection.create(newListAttrs, {
-      wait: true,
-      success: function (data) {
-        Trellino.lists.add(data);
-      },
-      error: function (data, xhr) {
-        this.$('input[type="text"]').effect("highlight", {}, 500)
-      }
-    });
+    var data = {
+      title: this.$('#title').val(),
+      rank: (this.board.lists().length + 1),
+      board_id: this.board.id
+    };
+    this.board.lists().create(data);
   },
 
   cancel: function (event) {
+    console.log("canceling");
     event.preventDefault();
     this.collection.trigger('add');
   }
