@@ -1,13 +1,14 @@
 /*global Trellino, Backbone, _ */
-"use strict";
+'use strict';
 
 Trellino.Models.List = Backbone.Model.extend({
   parse: function (resp) {
+    console.log("parsing list");
     if(resp.cards) {
-      this.cards().set(resp.cards);
+      this.cards().set(resp.cards, { parse: true });
       delete resp.cards;
     }
-    return resp.cards;
+    return resp;
   },
 
   cards: function () {
@@ -18,7 +19,7 @@ Trellino.Models.List = Backbone.Model.extend({
   },
 
   normalizeRanks: function (deletedCard, collection) {
-    console.log("HEY THERE BROTHER");
+    console.log('HEY THERE BROTHER');
     var deletedCardRank = deletedCard.get('rank');
     if (deletedCardRank === collection.models.length + 1) {
       return;

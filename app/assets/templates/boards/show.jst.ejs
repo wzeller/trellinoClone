@@ -4,18 +4,23 @@
   </div>
 </div>
 
-<div class="white_area span12">
-  <div class="flexwidth" id="list_index">
-    <ul class="list_list">
-    <% lists.each(function (list) { %>
-      <li class="list_entry" data-id="<%= list.id %>" id="list_<%= list.id %>">
-        <span class="list_entry" data-id="<%= list.id %>">
+<div class="row">
+  <% board.lists().each(function (list) { %>
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
           <%= list.escape('title') %>
-        </span>
-      </li>
-    <% }) %>
-    </ul>
-  </div>
+        </div>
+        <ul class="list-group">
+          <% list.cards().each(function (card) { %>
+            <li class="list-group-item">
+              <%= card.escape('title') %>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+  <% }) %>
 </div>
 
 <div class="span12" id="listAdder">
@@ -49,7 +54,7 @@
 </div>
 
 <div id="delete" class="modal hide fade" aria-labelledby="modallabel" aria-hidden="true">
-  <div class="modal-header">    
+  <div class="modal-header">
     <h3 id="modallabel">Delete board?</h3>
   </div>
 

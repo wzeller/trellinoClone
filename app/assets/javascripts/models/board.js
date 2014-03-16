@@ -1,10 +1,10 @@
 /*global Trellino, Backbone, _ */
-"use strict";
+'use strict';
 
 Trellino.Models.Board = Backbone.Model.extend({
   parse: function (resp) {
     if(resp.lists) {
-      this.lists().set(resp.lists);
+      this.lists().set(resp.lists, { parse: true });
       delete resp.lists;
     }
     return resp;
@@ -15,5 +15,5 @@ Trellino.Models.Board = Backbone.Model.extend({
       this._lists = new Trellino.Collections.Lists([], { board: this });
     }
     return this._lists;
-  },
+  }
 });

@@ -1,5 +1,5 @@
 /*global Trellino, Backbone */
-"use strict";
+'use strict';
 
 Trellino.Collections.Lists = Backbone.Collection.extend({
   initialize: function (options) {
@@ -9,7 +9,7 @@ Trellino.Collections.Lists = Backbone.Collection.extend({
 	model: Trellino.Models.List,
 
 	url: function () {
-		return "boards/" + this.board.id + "/lists";
+		return 'boards/' + this.board.id + '/lists';
 	},
 
   comparator: function (list) {

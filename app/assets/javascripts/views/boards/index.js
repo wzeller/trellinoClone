@@ -1,21 +1,19 @@
-/*global Trellino, Backbone, _ */
+/*global Trellino, Backbone, $, _, JST */
 "use strict";
 
 Trellino.Views.BoardsIndex = Backbone.View.extend({
-
 	initialize: function () {
-		this.listenTo(this.collection, 'remove', this.render);
+		this.listenTo(this.collection, 'remove sync', this.render);
 	},
 
 	template: JST['boards/index'],
 
   render: function () {
-    var renderedContent = this.template({
+    var content = this.template({
       boards: this.collection
     });
 
-    this.$el.html(renderedContent);
-
+    this.$el.html(content);
     return this;
   },
 

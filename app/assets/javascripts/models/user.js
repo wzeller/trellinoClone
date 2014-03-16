@@ -1,4 +1,4 @@
 /*global Trellino, Backbone, _ */
-"use strict";
+'use strict';
 
-Trellino.Models.User = Backbone.RelationalModel.extend({});
+Trellino.Models.User = Backbone.Model.extend({});
