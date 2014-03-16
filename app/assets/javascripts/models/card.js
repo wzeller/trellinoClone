@@ -3,7 +3,6 @@
 
 Trellino.Models.Card = Backbone.Model.extend({
   parse: function (response) {
-    console.log("parsing card");
     // var users = new Trellino.Collections.Users();
     // _(response.users).each(function (user) {
     //   users.add(user);

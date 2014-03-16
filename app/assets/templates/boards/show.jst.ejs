@@ -1,26 +1,6 @@
-<div class="row">
-  <div class="span4">
-    <h1><%= board.escape('title') %></h1>
-  </div>
-</div>
+<h2><%= board.escape('title') %></h2>
 
-<div class="row">
-  <% board.lists().each(function (list) { %>
-    <div class="col-md-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <%= list.escape('title') %>
-        </div>
-        <ul class="list-group">
-          <% list.cards().each(function (card) { %>
-            <li class="list-group-item">
-              <%= card.escape('title') %>
-            </li>
-          <% }) %>
-        </ul>
-      </div>
-    </div>
-  <% }) %>
+<div id="lists" class="row">
   <div class="col-md-3">
     <div class="panel panel-default">
       <div class="panel-heading">

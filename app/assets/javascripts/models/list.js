@@ -3,7 +3,6 @@
 
 Trellino.Models.List = Backbone.Model.extend({
   parse: function (resp) {
-    console.log("parsing list");
     if(resp.cards) {
       this.cards().set(resp.cards, { parse: true });
       delete resp.cards;

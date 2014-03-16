@@ -1,17 +1,17 @@
 /*global Trellino, Backbone, $, _, JST */
-"use strict";
+'use strict';
 
-Trellino.Views.ListNew = Backbone.View.extend({
+Trellino.Views.ListForm = Backbone.View.extend({
   initialize: function (options) {
     this.board = options.board;
   },
 
   events: {
-    "submit": "create",
-    "click button.cancel": "cancel"
+    'submit': 'create',
+    'click button.cancel': 'cancel'
   },
 
-  template: JST['lists/new'],
+  template: JST['lists/form'],
 
   render: function () {
     var content = this.template({
@@ -32,8 +32,8 @@ Trellino.Views.ListNew = Backbone.View.extend({
   },
 
   cancel: function (event) {
-    console.log("canceling");
     event.preventDefault();
-    this.collection.trigger('add');
+    // fake add so board rerenders
+    this.board.lists().trigger('add');
   }
 });

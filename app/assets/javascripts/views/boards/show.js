@@ -1,7 +1,7 @@
 /*global Trellino, Backbone, $, _, JST */
 'use strict';
 
-Trellino.Views.BoardShow = Backbone.View.extend({
+Trellino.Views.BoardShow = Backbone.CompositeView.extend({
   initialize: function () {
     this.listenTo(this.model, 'change', this.render);
     this.listenTo(this.model.lists(), 'add', this.render);
@@ -9,14 +9,23 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   },
 
   events: {
-    'click #new-list': 'addList',
-    'click span.list_entry': 'renameList',
-    'click button.newMember': 'addMember',
-    'click li.card_entry': 'showCard',
-    'click button.deleteBoard': 'deleteBoard'
+    'click #new-list': 'newListForm',
+    // 'click span.list_entry': 'renameList',
+    // 'click button.newMember': 'addMember',
+    // 'click li.card_entry': 'showCard',
+    // 'click button.deleteBoard': 'deleteBoard'
   },
 
   template: JST['boards/show'],
+
+  renderLists: function () {
+    this.model.lists().each(function (list) {
+      var view = new Trellino.Views.ListShow({
+        model: list
+      });
+      this.addSubView('#lists', view.render());
+    }, this);
+  },
 
   render: function () {
     //    var boardMembers = this.model.get('members');
@@ -28,7 +37,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     });
 
     this.$el.html(content);
-
+    this.renderLists();
     // this.$('ul.list_list').sortable({
     //   tolerance: 'pointer',
     //   start: function (event, ui) {
@@ -55,9 +64,9 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     return this;
   },
 
-  addList: function (event) {
+  newListForm: function (event) {
     event.preventDefault();
-    var view = new Trellino.Views.ListNew({
+    var view = new Trellino.Views.ListForm({
       board: this.model
     });
     $(event.currentTarget).replaceWith(view.render().$el);
