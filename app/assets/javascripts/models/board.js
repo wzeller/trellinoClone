@@ -1,13 +1,13 @@
 Trellino.Models.Board = Backbone.Model.extend({
-  urlRoot: "api/boards/",
+  urlRoot: "api/boards",
 
-  links: function(){
-    if (!this._links){
-      this._links = new Trellino.Collections.BoardLinks([], {
-        board: this
+  lists: function(){
+    if (!this._lists){
+      this._lists = new Trellino.Collections.BoardLists([], {
+        board: this,
       });
-      return this.links;
     }
+    return this._lists;
   }
   
 });

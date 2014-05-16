@@ -1,1 +1,8 @@
-<h1>Board</h1>
+<%= board.escape("title") %>
+<ul>
+<% lists.each(function (list) { %>
+<li>
+<%= list.escape("title") %>   
+</li>
+<% }) %>
+</ul>
