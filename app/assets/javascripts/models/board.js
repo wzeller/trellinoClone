@@ -2,9 +2,10 @@ Trellino.Models.Board = Backbone.Model.extend({
   urlRoot: "api/boards",
 
   parse: function(jsonResp){
+
     if (jsonResp.lists) {
 
-      this.lists().set(jsonResp.lists;
+      this.lists().set(jsonResp.lists);
       delete jsonResp.lists;
     }
     return jsonResp;
@@ -14,7 +15,7 @@ Trellino.Models.Board = Backbone.Model.extend({
     if (!this._lists){
       this._lists = new Trellino.Collections.BoardLists([], {
         board: this,
-      });
+      })
     }
     return this._lists;
   }

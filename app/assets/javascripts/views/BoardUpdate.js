@@ -17,6 +17,7 @@ Trellino.Views.BoardUpdate = Backbone.View.extend({
   },
 
   update: function(event){
+    that = this;
     event.preventDefault();
     var params = $(event.currentTarget).serializeJSON();
     var updatedBoard = new Trellino.Models.Board(params);
@@ -25,6 +26,9 @@ Trellino.Views.BoardUpdate = Backbone.View.extend({
 
       success: function(){
         Backbone.history.navigate(updatedBoard.url(), {trigger: true});
+      },
+      error: function(){
+        $('.errors').html("<h6>Such a user does not exist.  Try another email.</h6>");
       },
     });
   },

@@ -25,6 +25,10 @@ module Api
       if params[:newMemberEmail]
         email = params[:newMemberEmail]
         new_member = User.find_by_email(email)
+        if !new_member
+          render json: {errors: "test"}, status: 422
+          return nil 
+        end
         new_member && !@board.members.include?(new_member) && @board.members << new_member
       end
 
