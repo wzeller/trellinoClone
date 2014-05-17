@@ -3,6 +3,7 @@ Trellino.Routers.AppRouter = Backbone.Router.extend({
   routes: {
     "": "index",
     "api/boards/new": "new",
+    "api/boards/:id/lists": "newList",
     "api/boards/:id": "show",
   },
 
@@ -19,11 +20,16 @@ Trellino.Routers.AppRouter = Backbone.Router.extend({
   },
 
   show: function(id){
-
     var model = Trellino.Collections.boards.getOrFetch(id);
     model.lists().fetch();
     var newShow = new Trellino.Views.BoardShow({model: model, collection: model.lists()});
     $('#content').html(newShow.$el);
+  },
+
+  newList: function(id){
+    var model = Trellino.Collections.boards.getOrFetch(id);
+    var newList = new Trellino.Views.NewList({model: model});
+    $('#content').html(newList.$el);
   }
 
 })

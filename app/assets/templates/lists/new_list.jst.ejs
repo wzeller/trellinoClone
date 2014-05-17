@@ -1,0 +1,19 @@
+
+<h1> Make New List </h1>
+
+<form>
+
+  <input type="hidden" name="list[board_id]" value="<%= model.id %>">
+
+  <label>Enter List Title
+  <input type="text" name="list[title]" id="list_title">
+  </label>
+
+  <label>Enter List Rank
+  <input type="text" name="list[rank]" id="list_rank">
+  </label>
+
+  <input type="submit">  
+</form>
+
+<a href="#">Return to Index</a>
