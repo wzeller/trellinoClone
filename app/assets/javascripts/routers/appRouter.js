@@ -39,6 +39,4 @@ Trellino.Routers.AppRouter = Backbone.Router.extend({
     $('#content').html(updateBoard.$el);
   },
 
-
-
 })
