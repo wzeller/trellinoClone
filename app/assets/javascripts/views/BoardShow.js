@@ -4,6 +4,7 @@ Trellino.Views.BoardShow = Backbone.View.extend({
     this.render();
     this.listenTo(this.model, "sync destroy", this.render);
     this.listenTo(this.collection, "sync", this.render);
+    
   },
 
   events: {
@@ -23,10 +24,12 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   template: JST['boards/show_board'],
 
   render: function(){
+
     var renderedContent = this.template({
       board: this.model,
       lists: this.collection,
     });
+    
     this.$el.html(renderedContent);
     return this;
   }

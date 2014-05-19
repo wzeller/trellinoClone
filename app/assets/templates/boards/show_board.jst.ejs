@@ -1,11 +1,18 @@
-<%= board.escape("title") %>
-<ul>
-  <% lists.each(function (list) { %>
-    <li>
-    <%= list.escape("title") %> 
-    </li>
-  <% }) %>
-</ul>
+<div class="container-fluid">
+  <div class="row">  
+    <%= board.escape("title") %>
+      <ul>
+        <% lists.each(function (list) { %>
+            <div class="col-xs-2">
+              <li>
+              <%= list.escape("title") %>
+              </li>
+              <div class=""
+            </div>
+        <% }) %>
+      </ul><br>
+  </div>
+</div>
 
 
 
