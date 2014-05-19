@@ -1,0 +1,22 @@
+<h1> Make New Card </h1>
+
+<form>
+
+  <input type="hidden" name="card[list_id]" value="<%= model.id %>">
+
+  <label>Enter Card Title
+  <input type="text" name="card[title]" id="card_title">
+  </label>
+
+  <label>Enter Card Description
+  <input type="text" name="card[description]" id="card_description">
+  </label>
+
+  <label>Enter Card Rank
+  <input type="text" name="card[rank]" id="card_rank">
+  </label>
+
+  <input type="submit">  
+</form>
+
+<a href="#">Return to Index</a>

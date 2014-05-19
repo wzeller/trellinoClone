@@ -1,5 +1,9 @@
 Trellino.Collections.ListCards = Backbone.Collection.extend({
 
+  url: function(){
+    return this.lists.url() + "/cards";
+  },
+
   model: Trellino.Models.Card,
 
   initialize: function(models, options){
@@ -8,3 +12,4 @@ Trellino.Collections.ListCards = Backbone.Collection.extend({
   },
 
 });
+

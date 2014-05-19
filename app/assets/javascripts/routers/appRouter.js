@@ -6,6 +6,7 @@ Trellino.Routers.AppRouter = Backbone.Router.extend({
     "api/boards/:id/lists": "newList",
     "api/boards/:id": "show",
     "api/boards/:id/update": "update",
+    "api/lists/:list_id/cards":"newCard" 
   },
 
 
@@ -37,6 +38,12 @@ Trellino.Routers.AppRouter = Backbone.Router.extend({
     var model = Trellino.Collections.boards.getOrFetch(id);
     var updateBoard = new Trellino.Views.BoardUpdate({model: model})
     $('#content').html(updateBoard.$el);
+  },
+
+  newCard: function(id){
+    var list = Trellino.Collections.lists.getOrFetch(id);
+    var newCard = new Trellino.Views.NewCard({model: list});
+    $("#content").html(newCard.$el);
   },
 
 })

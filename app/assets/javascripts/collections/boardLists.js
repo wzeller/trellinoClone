@@ -12,3 +12,4 @@ Trellino.Collections.BoardLists = Backbone.Collection.extend({
   },
 
 });
+
