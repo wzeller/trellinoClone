@@ -25,8 +25,9 @@ module Api
       if params[:newMemberEmail]
         email = params[:newMemberEmail]
         new_member = User.find_by_email(email)
+        #code to provide error when user attempt to add another user without email address
         if !new_member
-          render json: {errors: "test"}, status: 422
+          render json: {errors: @board.errors.full_messages}, status: 422
           return nil 
         end
         new_member && !@board.members.include?(new_member) && @board.members << new_member
