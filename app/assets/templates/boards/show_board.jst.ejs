@@ -1,31 +1,15 @@
 <div class="container-fluid">
   <div class="row" id="board">  
     <%= board.escape("title") %>
-      <ul>
-        <% lists.each(function (list) { %>
-          <div class="col-xs-2" id="list">
-            <li id="individual-item">
-              <%= list.escape("title") %>
-                <ul>
-                  <% list.cards().each(function (card) {%>
-                    <div class="card" id="<%=card.get("id")%>">
-                      <li><%= card.escape("title") %></li>
-                      <button type="button" class="btn btn-default btn-xs destroyBtn" data-id=<%=card.get("id")%>>Delete</button>
-                    </div>
-                  <% }) %>
-                  <a href=<%= "#/api/lists/" +  list.get("id") + "/cards" %>>Make new card</a><br>
-                </ul>
-              </li>
-          </div>
-        <% }) %>
-      </ul><br>
+      <div id="listContents">
+      </div>
   </div>
 </div>
-
 
 
 <a href=<%= "#" + board.url() + "/lists"%>>Make new list</a><br>
 <a href=<%= "#" + board.url() + "/update"%>>Add member to board</a><br>
 <button class="destroy">Delete board</button>
+
 
 

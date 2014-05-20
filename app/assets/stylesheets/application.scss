@@ -15,11 +15,6 @@
 
 @import "bootstrap";
 
-.list-item{
-  float: left;
-  padding-left: 50px;
-  padding-right: 50px;
-}
 
 #board{
   background: blue;
@@ -27,16 +22,19 @@
 }
 
 #individual-item{
+  padding-left: 20px;
+  padding-right: 20px;
+  float: left;
   background: grey;
 }
 
 .card{
+  border: solid;
+  padding-top: 20px;
+  padding-bottom: 20px;
   background: white;
   color: black;
 }
 
 
-#destroy-btn{
-
-}
 

@@ -1,9 +1,19 @@
-Trellino.Views.BoardShow = Backbone.View.extend({
+Trellino.Views.BoardShow = Backbone.CompositeView.extend({
 
   initialize: function() {
     this.render();
     this.listenTo(this.model, "sync destroy", this.render);
     this.listenTo(this.collection, "sync", this.render);
+    this.listenTo(this.collection, "add", this.addList);
+    var that = this;
+    this.listViews = this.collection.each(function(list) {
+      that.addList(list);
+    })
+  },
+
+  addList: function(list){
+    var listView = new Trellino.Views.ListShow({ model: list });
+    this.addSubview('#listContents', listView);
   },
 
   events: {
@@ -47,12 +57,12 @@ Trellino.Views.BoardShow = Backbone.View.extend({
   render: function(){
   
     var renderedContent = this.template({
-      board: this.model,
-      lists: this.collection,
+      board: this.model
     });
     
     this.$el.html(renderedContent);
-    $(".destroyBtn").hide();
+    this.attachSubviews();
+      
     return this;
   },
 
